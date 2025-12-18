@@ -1,4 +1,4 @@
-#Triangle-Free r-Regular Graphs
+# Triangle-Free r-Regular Graphs
 
 ## Overview
 
