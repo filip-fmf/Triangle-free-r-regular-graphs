@@ -268,18 +268,35 @@ sosedstev. Spodaj lahko vidimo tabele koliko grafov ustreza temu pogoju pri razl
 \caption{Grafi, ki ustrezajo iii) za $n=16$, $r=5$ (8 od 32)}
 \end{figure}
 
-\section{Naključni sprehodi med večjimi grafi s premerom največ 3}
+\section{Naključni sprehodi po prostoru $r$-regularnih grafov s premerom največ 3}
 
-Za eksperimentalno analizo smo izvedli naključne sprehode po prostoru $r$-regularnih grafov brez trikotnikov.
-Spremljali smo število vozlišč, katerih soseska tvori maksimalen \emph{strong odd independent set} (SOIS). 
-Začetni graf je bil izbran kot znan primer (Petersenov graf ali $K_{r,r}$ za lihe $r$), če je bil na voljo;
-sicer smo uporabili naključni $r$-regularen graf brez trikotnikov.
+Za eksperimentalno analizo lastnosti (i) smo izvedli naključne sprehode po prostoru povezanih $r$-regularnih grafov brez trikotnikov.
+Prehode med grafi smo generirali z operacijo \emph{random 2-switch}, ki ohranja regularnost in število vozlišč.
 
-Med sprehodi z naključnimi zamenjavami povezav (angl. \emph{random 2-switch}) smo beležili dva parametra: premer grafa in število vozlišč, katerih soseska je maksimalen SOIS.
-Rezultati kažejo, da so grafi s premerom $\leq 3$, pri katerih vsaj ena soseska tvori maksimalen SOIS, izjemno redki.
-Pri velikih grafih se skoraj nobena soseska ne obnaša kot maksimalni SOIS. 
-Vizualizacija števila takšnih sosesk v odvisnosti od koraka sprehoda potrjuje, da pogoja (i) in (ii) postaneta zelo restriktivna pri večjih grafih,
-kar je skladno s teoretičnimi pričakovanji.
+Vsak graf $G$ smo vrednotili glede na:
+\begin{itemize}
+    \item njegov premer,
+    \item število vozlišč $v$, za katera soseska $N(v)$ tvori \emph{strong odd independent set} (SOIS),
+    \item ter vrednost parametra $\alpha_{od}(G)$.
+\end{itemize}
+
+Iskanje je potekalo s simuliranim ohlajanjem, kjer smo preferirali grafe z manjšim premerom in večjim številom sosesk, ki zadoščajo pogojem SOIS.
+Začetni graf je bil izbran med znanimi primeri (npr. Petersenov graf ali $K_{r,r}$ za lihe $r$), sicer pa smo uporabili naključni $r$-regularen graf brez trikotnikov.
+
+Izvedli smo $700$ neodvisnih ponovitev (restartov) algoritma, pri čemer je vsak sprehod obsegal več tisoč korakov.
+V nobeni izmed ponovitev nismo našli grafa, ki bi zadoščal pogoju (i).
+
+Eksperimentalni rezultati kažejo, da so grafi s premerom $\leq 3$, pri katerih je vsaj ena soseska maksimalen SOIS, izjemno redki.
+Z večanjem števila vozlišč hitro opazimo, da:
+\begin{enumerate}
+    \item premer grafa tipično naraste nad 3,
+    \item soseske skoraj nikoli ne tvorijo maksimalnega SOIS,
+    \item vrednost $\alpha_{od}(G)$ odstopa od stopnje $r$.
+\end{enumerate}
+
+Empirični rezultati tako podpirajo hipotezo, da so grafi, ki zadoščajo pogoju (i), zelo redke in strukturno močno omejene konfiguracije.
+Negativni rezultat po $700$ ponovitvah dodatno nakazuje, da morebitni primeri — če obstajajo — verjetno zahtevajo posebno, visoko simetrično konstrukcijo.
+
 
 \section{Preizkušanje močno regularnih grafov tipa $\mathrm{srg}(n,r,\lambda = 0,\mu)$}
 
