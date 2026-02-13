@@ -107,35 +107,15 @@ enakomerno razporejeno strukturo. To nakazuje, da je visoka simetrija grafa klju
 Podrobni primeri in slike so zbrani v prilogi.
 
 \subsection{$(ii)$ del}
-V tem delu obravnavamo grafe, za katere velja, da ima neko vozlišče
-maksimalno močno liho neodvisno množico enake velikosti.
+V tem delu obravnavamo grafe, za katere obstaja vsaj eno vozlišče $v$, tako da je njegova sosednost $N(v)$ maksimalna močno liha neodvisna množica (strong odd independent set).
 
 \subsubsection*{Opis pristopa}
+Pogoj $(ii)$ je strukturno manj zahteven kot pogoj $(i)$, saj ne zahteva, da so vse sosednosti vseh vozlišč maksimalne po velikosti, temveč le, da za vsaj eno vozlišče obstaja $N(v)$, ki doseže globalno maksimalno velikost $\alpha_{od}(G)$.
 
-Ta pogoj je strukturno manj zahteven kot v $(i)$ delu, saj ne zahteva, da so vse
-maksimalne močne lihe neodvisne množice enake velikosti, temveč le, da zanje
-obstaja reprezentant med maksimalnimi množicami, povezanimi s posameznimi
-vozlišči.
-
-Pristop temelji na generiranju in analizi grafov majhnega reda. Za vsak graf
-preverimo, ali za vsako vozlišče $v$ obstaja taka maksimalna močno liha
-neodvisna množica $N(v)$, ki je hkrati tudi maksimalna močno liha neodvisna
-množica za neko vozlišče $u$ v grafu (kjer $u$ je lahko tudi $v$).
-To pomeni, da vsaka lokalno maksimalna množica (izbrana iz perspektive
-nekaterega vozlišča) doseže globalno maksimalno velikost glede na neko vozlišče.
+Pristop temelji na generiranju in analizi grafov majhnega reda. Za vsak graf preverimo, ali obstaja vozlišče $v$, za katerega $N(v)$ zadostuje pogojem močne lihe neodvisnosti in hkrati dosega največjo možno velikost $\alpha_{od}(G)$.
 
 \subsubsection*{Ugotovitve}
-
-Rezultati kažejo, da je ta pogoj precej bolj pogost kot v $(i)$ delu.
-Poleg visoko simetričnih grafov (kot so Petersenov graf in popolni dvodelni
-grafi $K_{r,r}$ z lihim $r$ pogoj izpolnjuje tudi več drugih grafov kot pri $(i)$
-
-Pogoj je torej veliko bolj vključujoč in se pojavlja v raznolikih strukturah,
-ki dopuščajo, da se z vidika vsakega vozlišča da identificirati neko
-maksimalno močno liho neodvisno množico, ki je enake velikosti kot neka
-globalno maksimalna množica.
-
-Na koncu je nekaj grafov, ki ustrezajo temu pogoju.
+Rezultati kažejo, da je ta pogoj precej pogostejši kot pogoj $(i)$. Poleg visoko simetričnih grafov, kot sta Petersenov graf in popolni dvodelni graf $K_{r,r}$ z lihim $r$, obstajajo tudi drugi grafi, ki zadostijo temu pogoju. Pogoj $(ii)$ je zato veliko bolj vključujoč in se pojavlja v raznolikih strukturah, ki omogočajo, da se z vidika vsaj enega vozlišča identificira maksimalna močno liha neodvisna množica.
 \subsection{$(iii)$) del}
 
 V tem delu obravnavamo najšibkejši pogoj, in sicer da velja
