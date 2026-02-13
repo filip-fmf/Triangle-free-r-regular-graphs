@@ -1,0 +1,340 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[slovene]{babel}
+\usepackage{lmodern}  
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{float}
+
+\newcommand{\fn}[1]{\texttt{#1}}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+
+    {\Large Univerza v Ljubljani\\
+    Fakulteta za matematiko in fiziko\par}
+    
+    \vspace{3cm}
+    
+    {\Huge \textbf{r-regularni grafi brez trikotnikov}\par}
+    
+    \vspace{3cm}
+    
+    {\large Avtorja:\par}
+    \vspace{0.2cm}
+    {\large Luka Hodnik\\
+    Filip Cerkovnik\par}
+    
+    \vfill
+    
+    {\large Februar 2026\par}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Uvod}
+Naj bo $r$ liho število. V projektu obravnavamo problem karakterizacije
+povezanih, trikotnikov prostih in $r$-regularnih grafov, ki zadoščajo
+naslednjim pogojem:
+\begin{enumerate}
+    \item Za vsako vozlišče $v$ je množica $N(v)$ maksimalna močna liha
+    neodvisna množica.
+    \item Obstaja vsaj eno vozlišče $v$, za katero je množica $N(v)$
+    maksimalna močna liha neodvisna množica.
+    \item Velja $\alpha_{od}(G) = r$.
+\end{enumerate}
+
+Gre za tri različne probleme, pri čemer velja zaporedje implikacij
+\[
+(i)\Rightarrow(ii)\Rightarrow(iii).
+\]
+
+Znana sta dva primera grafov, ki zadoščata pogoju (i), in sicer
+Petersenov graf ter polni dvodelni graf $K_{r,r}$, kjer je $r$ liho.
+Pomagali si bomo tudi z 2 znanima dejstvoma iz literature:
+\begin{enumerate}
+    \item Nujen pogoj za izpolnjevanje pogojev $(i)$ in $(ii)$ je, da ima graf
+    premer največ $3$.
+    \item Kar zadeva pogoj $(iii)$, pri katerem $r \ge 3$ ni nujno liho število,
+    zaradi odsotnosti pogojev na sosedstva $N(v)$ velja zgornja meja
+    za red grafa
+    \[
+    |V(G)| \le r(r^2 - 1).
+    \]
+\end{enumerate}
+
+
+\section{Cilji naloge}
+Cilji naloge so trije: 
+\begin{enumerate}
+    \item Poiskati grafe, ki ustrezajo pogojem $(i)$, $(ii)$ in $(iii)$ za različne vrednosti $n$ in $r$.
+    \item Uporabiti naključne sprehode med večjimi grafi s premerom največ 3.
+    \item Preveriti pogoje na močno regularnih grafih $\mathrm{srg}(n,r,\lambda = 0,\mu)$.
+\end{enumerate}
+
+\section{Iskanje grafov, ki zadoščajo pogojem $(i)$, $(ii)$ in $(iii)$}
+
+\subsection{$(i)$ del}
+V tem delu obravnavamo grafe, za katere velja, da ima vsako vozlišče
+maksimalno močno liho neodvisno množico enake velikosti.
+
+\subsubsection{Opis pristopa}
+
+Ker gre za zelo restriktiven pogoj, smo se omejili na sistematično iskanje
+grafov majhnega reda. Pri tem smo upoštevali znano dejstvo, da je nujen
+pogoj za izpolnitev tega pogoja, da ima graf premer največ $3$.
+S tem smo bistveno zmanjšali iskalni prostor.
+
+Preverjanje lastnosti smo izvedli z računalniškim programom, ki za vsak
+kandidatni graf izračuna velikost maksimalne močne lihe neodvisne množice
+glede na posamezno vozlišče.
+
+\subsubsection{Ugotovitve}
+
+Rezultati kažejo, da je pogoj izjemno močan in ga izpolnjuje zelo malo grafov.
+Pri majhnih redih se pojavi le nekaj izjem, ki so večinoma dobro znani
+in imajo visoko stopnjo simetrije.
+
+Med najbolj značilnimi primeri se pojavita Petersenov graf in družina grafov
+$K_{r,r}$, kjer je $r$ liho število. Gre za grafe z majhnim premerom in
+enakomerno razporejeno strukturo. To nakazuje, da je visoka simetrija grafa ključnega pomena za izpolnjevanje pogoja iz tega dela naloge. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.48\textwidth]{i1.png}
+\includegraphics[width=0.24\textwidth]{i2.png}
+\includegraphics[width=0.24\textwidth]{i3.png}
+\caption{Grafi, ki ustrezajo i). Po vrsti: Petersenov graf, $K_{3,3}$, $K_{5,5}$, $K_{7,7}$.}
+\end{figure}
+
+\subsection{$(ii)$ del}
+V tem delu obravnavamo grafe, za katere obstaja vsaj eno vozlišče $v$, tako da je njegova sosednost $N(v)$ maksimalna močno liha neodvisna množica (strong odd independent set).
+
+\subsubsection*{Opis pristopa}
+Pogoj $(ii)$ je strukturno manj zahteven kot pogoj $(i)$, saj ne zahteva, da so vse sosednosti vseh vozlišč maksimalne po velikosti, temveč le, da za vsaj eno vozlišče obstaja $N(v)$, ki doseže globalno maksimalno velikost $\alpha_{od}(G)$.
+
+Pristop temelji na generiranju in analizi grafov majhnega reda. Za vsak graf preverimo, ali obstaja vozlišče $v$, za katerega $N(v)$ zadostuje pogojem močne lihe neodvisnosti in hkrati dosega največjo možno velikost $\alpha_{od}(G)$.
+
+\subsubsection*{Ugotovitve}
+Rezultati kažejo, da je ta pogoj precej pogostejši kot pogoj $(i)$. Poleg visoko simetričnih grafov, kot sta Petersenov graf in popolni dvodelni graf $K_{r,r}$ z lihim $r$, obstajajo tudi drugi grafi, ki zadostijo temu pogoju. Pogoj $(ii)$ je zato veliko bolj vključujoč in se pojavlja v raznolikih strukturah, ki omogočajo, da se z vidika vsaj enega vozlišča identificira maksimalna močno liha neodvisna množica.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.48\textwidth]{graph_n6_idx1.png}
+\includegraphics[width=0.48\textwidth]{graph_n10_idx5.png}
+\includegraphics[width=0.48\textwidth]{graph_n10_idx6.png}
+\caption{Graf, ki ustreza $(ii)$ za $r=3$}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.20\textwidth]{graph_r5_n10_idx1.png}
+\includegraphics[width=0.20\textwidth]{graph_r5_n16_idx179.png}
+\includegraphics[width=0.20\textwidth]{graph_r5_n16_idx180.png}
+\includegraphics[width=0.20\textwidth]{graph_r5_n16_idx181.png}
+\includegraphics[width=0.20\textwidth]{graph_r5_n16_idx181.png}
+\includegraphics[width=0.20\textwidth]{graph_r5_n16_idx372.png}
+\includegraphics[width=0.20\textwidth]{graph_r5_n16_idx379.png}
+\includegraphics[width=0.20\textwidth]{graph_r5_n16_idx383.png}
+\caption{Grafi, ki ustrezajo ii) za $r=5$ pri različnih $n$}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.30\textwidth]{graph_r7_n14_idx1.png}
+\caption{Graf, ki ustreza ii) za $n=14$, $r=7$}
+\end{figure}
+
+\subsection{($iii$) del}
+
+V tem delu obravnavamo najšibkejši pogoj, in sicer da velja
+\[
+\alpha_{od}(G) = r.
+\]
+Pri tem ne zahtevamo posebnih pogojev glede posameznih vozlišč.
+Ker je pogoj bistveno šibkejši kot v prejšnjih delih sva dobila veliko več grafov, ki ustreza temu pogoju.
+Izkazalo se je, da ta pogoj dopušča bistveno večjo raznolikost grafov.
+Čeprav mora graf še vedno izpolnjevati osnovne strukturne omejitve,
+kot je majhen premer, se pojavijo številni primeri z zelo različno lokalno
+strukturo.
+Rezultati potrjujejo, da pogoj $\alpha_{od}(G)=r$ sam po sebi ne vsiljuje
+visoke simetrije grafa, temveč predvsem omejuje paritetne lastnosti
+sosedstev. Spodaj lahko vidimo tabele koliko grafov ustreza temu pogoju pri različnem parametru $n$ in parametru $r$. Rezultati niso napisani za vse možne vrednosti $n$, saj pri prevelikih vrednostih program predolgo deluje in nama zmanjka RAMA. Podrobnejši primeri so zbranni v prilogi.
+
+
+\begin{table}[H]
+    \centering
+    {\bfseries $r = 3$}\\[0.5em]
+    \begin{tabular}{cr}
+        \toprule
+        $n$ & Število grafov z $\alpha_{\mathrm{od}}(G) = r$ \\
+        \midrule
+        4 & 0 \\
+        6 & 1 \\
+        8 & 0 \\
+        10 & 2 \\
+        12 & 11 \\
+        14 & 23 \\
+        16 & 13 \\
+        18 & 0 \\
+        20 & 0 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Število grafov z $\alpha_{\mathrm{od}}(G)=r$, pri različnih $n$ za $r=3$}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    {\bfseries $r = 5$}\\[0.5em]
+    \begin{tabular}{cr}
+        \toprule
+        $n$ & Število grafov z $\alpha_{\mathrm{od}}(G) = r$ \\
+        \midrule
+        6 & 0 \\
+        8 & 0 \\
+        10 & 1 \\
+        12 & 0 \\
+        14 & 0\\
+        16 & 32 \\
+        18 & >30.000 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Število grafov z $\alpha_{\mathrm{od}}(G)=r$, pri različnih $n$ za $r=5$}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    {\bfseries $r = 7$}\\[0.5em]
+    \begin{tabular}{cr}
+        \toprule
+        $n$ & Število grafov z $\alpha_{\mathrm{od}}(G) = r$ \\
+        \midrule
+        8 & 0 \\
+        10 & 0 \\
+        12 & 0 \\
+        14 & 1\\
+        16 & 0 \\
+        18 & 0 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Število grafov z $\alpha_{\mathrm{od}}(G)=r$, pri različnih $n$ za $r=7$}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics{n6r3.png}
+\caption{Graf, ki ustreza iii) za $n=6$, $r=3$}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics{n10r3.png}
+\caption{Grafa, ki ustrezata iii) za $n=10$, $r=3$}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics{n12r3.png}
+\caption{Grafi, ki ustrezajo iii) za $n=12$, $r=3$}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics{n14r3.png}
+\caption{Grafi, ki ustrezajo iii) za $n=12$, $r=3$ (8 od 23)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics{n16r3.png}
+\caption{Grafi, ki ustrezajo iii) za $n=16$, $r=3$ (8 od 13)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics{n10r5.png}
+\caption{Graf, ki ustreza iii) za $n=10$, $r=5$}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics{n16r5.png}
+\caption{Grafi, ki ustrezajo iii) za $n=16$, $r=5$ (8 od 32)}
+\end{figure}
+
+\section{Naključni sprehodi po prostoru $r$-regularnih grafov s premerom največ 3}
+
+Za eksperimentalno analizo lastnosti (i) smo izvedli naključne sprehode po prostoru povezanih $r$-regularnih grafov brez trikotnikov.
+Prehode med grafi smo generirali z operacijo \emph{random 2-switch}, ki ohranja regularnost in število vozlišč.
+
+Vsak graf $G$ smo vrednotili glede na:
+\begin{itemize}
+    \item njegov premer,
+    \item število vozlišč $v$, za katera soseska $N(v)$ tvori \emph{strong odd independent set} (SOIS),
+    \item ter vrednost parametra $\alpha_{od}(G)$.
+\end{itemize}
+
+Iskanje je potekalo s simuliranim ohlajanjem, kjer smo preferirali grafe z manjšim premerom in večjim številom sosesk, ki zadoščajo pogojem SOIS.
+Začetni graf je bil izbran med znanimi primeri (npr. Petersenov graf ali $K_{r,r}$ za lihe $r$), sicer pa smo uporabili naključni $r$-regularen graf brez trikotnikov.
+
+Izvedli smo $1000$ neodvisnih ponovitev (restartov) algoritma, pri čemer je vsak sprehod obsegal več tisoč korakov.
+V nobeni izmed ponovitev nismo našli grafa, ki bi zadoščal pogoju (i).
+
+Eksperimentalni rezultati kažejo, da so grafi s premerom $\leq 3$, pri katerih je vsaj ena soseska maksimalen SOIS, izjemno redki.
+Z večanjem števila vozlišč hitro opazimo, da:
+\begin{enumerate}
+    \item premer grafa tipično naraste nad 3,
+    \item soseske skoraj nikoli ne tvorijo maksimalnega SOIS,
+    \item vrednost $\alpha_{od}(G)$ odstopa od stopnje $r$.
+\end{enumerate}
+
+Empirični rezultati tako podpirajo hipotezo, da so grafi, ki zadoščajo pogoju (i), zelo redke in strukturno močno omejene konfiguracije.
+Negativni rezultat po $1000$ ponovitvah dodatno nakazuje, da morebitni primeri — če obstajajo — verjetno zahtevajo posebno, visoko simetrično konstrukcijo.
+
+
+\section{Preizkušanje močno regularnih grafov tipa $\mathrm{srg}(n,r,\lambda = 0,\mu)$}
+
+Opazimo, da znana primera grafov (Petersenov graf in graf $K_{r,r}$),
+ki zadoščata pogoju iz dela $(i)$, spadata v razred močno regularnih grafov.
+To naju je spodbudilo, da sva preverjanje pogojev $(i)$-$(iii)$ preizkusila tudi na drugih močno regularnih grafih tipa $\mathrm{srg}(n,r,\lambda = 0,\mu)$.
+
+Preverjanje sva najprej preizkusila na Petersenovem grafu, ki ima vrednosti
+$(10,3,0,1)$, in Clebschovem grafu, ki je še en znan primer strogo
+regularnega grafa z vrednostmi $(16,5,0,2)$.
+Rezultat je zelo pričakovan: Petersenov graf zadošča vsem pogojem $(i)$-$(iii)$, Clebschov graf pa nobenemu.
+
+Preverjanje sva nato še preizkusila na grafih $K_{r,r}$ za $r=3,5,7$ in
+pričakovano vsi zadoščajo vsem pogojem $(i)$-$(iii)$.
+
+Nato sva iskanje preizkusila še na naključnih strogo regularnih grafih. Za ilustracijo razlik med posameznimi pogoji sva izbrali po en
+reprezentativen primer grafa za vsako izmed kombinacij
+$(i),(ii),(iii) = (\text{True},\text{True},\text{True})$,
+$(\text{False},\text{True},\text{True})$ in
+$(\text{False},\text{False},\text{True})$.
+Primeri so bili izbrani iz nabora naključno generiranih grafov.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.32\textwidth]{grafTTT.png}
+\includegraphics[width=0.32\textwidth]{grafFTT.png}
+\includegraphics[width=0.32\textwidth]{grafFFT.png}
+\caption{Primeri grafov z $(i),(ii),(iii) =(\text{True},\text{True},\text{True})$, $(\text{False},\text{True},\text{True})$ in $(\text{False},\text{False},\text{True})$.}
+\end{figure}
+
+
+
+\section{Zaključek}
+V nalogi smo preučili nekaj strukturnih lastnosti grafov. Izkazalo se je da pogojema $(i)$ in $(ii)$ 
+ustreza zelo malo grafov, saj sta pogoja zelo stroga, za pogoj $(iii)$ je takšnih grafov več. 
+Petersenov graf in grafi $K{r,r}$ za $r$ je liho število so posebni zaradi svoje strukture in ustrezajo vsem pogojem, 
+hkrati pa spadajo v skupino močno regularnih grafov $\mathrm{srg}(n,r,\lambda = 0,\mu)$. Te grafe je zanimivo preučevati,
+ saj jih veliko ustreza navedenim pogojem, predvsem pogoju $(iii)$.
+
+
+\end{document}
